@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="partials/partials.html :: head('All Posts')"></head>
+<head th:replace="partials/partials.html :: head('Posts')"></head>
 <body>
 <nav th:replace="partials/partials.html :: nav"></nav>
-<header th:replace="partials/partials.html :: header('Posts')"></header>
-<main class="container">
-    <article th:each="post : ${posts}">
-        <a th:href="@{/posts/{id}(id=${post.id})}">
-            <h3 th:text="${post.title}"></h3>
-            <p th:text="${post.body}"></p>
-        </a>
-    </article>
-</main>
+<div class="container col-md-8">
+    <header th:replace="partials/partials.html :: header('View Posts')"></header>
+    <div class="mb-3" th:each="post : ${posts}">
+        <h3 th:text="${post.title}"></h3>
+        <p th:text="${post.body}"></p>
+        <div class="d-flex">
+            <a th:href="@{/posts/{id}(id = ${post.id})}">Details</a>
+            <a class="ms-2" th:href="@{/posts/{id}/edit(id = ${post.id})}">Edit</a>
+        </div>
+
+    </div>
+    <br>
+</div>
 </body>
 </html>
